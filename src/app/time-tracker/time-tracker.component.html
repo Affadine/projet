@@ -1,0 +1,44 @@
+<div class="container">
+
+  <div class="jumborton">
+    <h1>Time Tracker</h1>
+  </div>
+
+  <div class="input-group">
+    <input type="text" class="form-control"  placeholder="Ajout d'une Catégorie" #titreCategorie>
+    <div class="input-group-addon" (click)="ajouterCategorie(titreCategorie)">
+      <i class="fa fa-plus-circle"></i>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <input type="text" class="form-control"  placeholder="Tache à saisir" #titreTache>
+    <select class="form-control" #selectedCategory >
+      <option *ngFor="let categorie of categories">{{categorie.titre}}</option>
+    </select>
+
+
+    <div class="input-group-addon" (click)="ajouterTache(titreTache, selectedCategory.value)">
+        <i class="fa fa-plus-circle"></i>
+      </div>
+
+
+  </div>
+
+
+
+  <ul class="list-group" *ngFor="let categorie of categories, let j = index">
+    <i class="bi bi-folder"></i> <h2>{{categorie.titre}}</h2>
+    <li class="list-group-item" *ngFor="let tache of categorie.taches, let i = index">
+      <span (click)="demarrerTache(tache)">
+        <i class="fa fa-lg" [ngClass]="tache.estDemaree ? 'fa-pause-circle-o' : 'fa-play-circle-o'"></i>
+      </span>
+      {{tache.titre}} {{tempsDynamique(tache,i)}}
+    </li>
+
+
+
+  </ul>
+
+</div>
+
